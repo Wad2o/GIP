@@ -1,0 +1,4 @@
+const REPORT_TYPES = ['LOST', 'FOUND'];
+const REPORT_STATUSES = ['RECOVERED', 'NOT_RECOVERED'];
+
+module.exports = { REPORT_TYPES, REPORT_STATUSES };

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9e7df">
+  <title>Calculatrice</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <section class="calculator-wrap">
+  
+      <div class="calc">
+        <div class="calc-top"><span class="calc-label">CALCULATRICE</span><span class="status"><i></i> PRÊTE</span></div>
+        <div class="screen" role="status" aria-live="polite" aria-atomic="true"><div class="sub" id="sub"></div><div class="main" id="main" data-size="l">0</div></div>
+        <div class="keys" id="keys">
+          <button class="danger" data-k="clear" aria-label="Tout effacer">AC</button><button class="utility" data-k="(" aria-label="Ouvrir une parenthèse">(</button><button class="utility" data-k=")" aria-label="Fermer une parenthèse">)</button><button class="utility" data-k="back" aria-label="Effacer le dernier caractère">⌫</button>
+          <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button class="op" data-k="/" aria-label="Diviser">÷</button>
+          <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button class="op" data-k="*" aria-label="Multiplier">×</button>
+          <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button class="op" data-k="-" aria-label="Soustraire">−</button>
+          <button data-k="0">0</button><button data-k="." aria-label="Virgule décimale">.</button><button class="utility" data-k="%" aria-label="Pourcentage">%</button><button class="op" data-k="+" aria-label="Additionner">+</button>
+          <button class="equals" data-k="=" aria-label="Calculer le résultat"><span>Calculer</span><span aria-hidden="true">=</span></button>
+        </div>
+        <div class="calc-bottom"><span>UN CALCUL À LA FOIS.</span><span aria-hidden="true">✳</span></div>
+      </div>
+      <p class="keyboard-tip"><kbd>Entrée</kbd> pour calculer <span>·</span> <kbd>Échap</kbd> pour effacer</p>
+  </section>
+
+
+
+</body>
+</html>

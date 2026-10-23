@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auto-complete search</title>
+<style>
+:root{--bg:#f3f4f6;--panel:#fff;--text:#111827;--muted:#6b7280;--line:#d1d5db;--hover:#eef2ff;--accent:#4f46e5;--mark:#e0e7ff;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--panel:#181b21;--text:#f3f4f6;--muted:#9ca3af;--line:#374151;--hover:#2a2f55;--accent:#818cf8;--mark:#343a6b;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:2rem 1rem;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:34rem;margin:0 auto}
+h1{margin:0 0 .25rem;font-size:1.6rem}
+.muted{color:var(--muted);font-size:.9rem;margin:.25rem 0}
+.box{position:relative;margin-top:1.2rem}
+input{width:100%;padding:.9rem 1rem;font:inherit;font-size:1.1rem;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:.8rem}
+input:focus{outline:3px solid var(--accent);outline-offset:1px}
+ul{position:absolute;left:0;right:0;top:calc(100% + .35rem);z-index:5;margin:0;padding:.3rem;list-style:none;max-height:20rem;overflow-y:auto;background:var(--panel);border:1px solid var(--line);border-radius:.8rem;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+ul[hidden]{display:none}
+li{padding:.6rem .8rem;border-radius:.5rem;cursor:pointer}
+li.active{background:var(--hover)}
+li.empty,li.more{color:var(--muted);cursor:default;font-size:.9rem}
+mark{background:var(--mark);color:inherit;border-radius:.2rem;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.chips button{font:inherit;font-size:.85rem;padding:.35rem .7rem;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:2rem;cursor:pointer}
+.chips button:hover{border-color:var(--accent)}
+#picked{margin-top:1.2rem;font-weight:600}
+</style>
+</head>
+<body>
+<main>
+  <h1>Auto-complete search</h1>
+  <p class="muted" id="meta"></p>
+  <div class="box">
+    <input id="search" type="text" role="combobox" aria-expanded="false" aria-controls="results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Start typing…" aria-label="Search">
+    <ul id="results" role="listbox" hidden></ul>
+  </div>
+  <p class="muted" id="status" aria-live="polite"></p>
+  <div class="chips">
+    <span class="muted">Try:</span>
+    <button type="button" data-try="land">land</button>
+    <button type="button" data-try="cote d'ivoire">cote d'ivoire</button>
+    <button type="button" data-try="sao tome">sao tome</button>
+    <button type="button" data-try="turkiye">turkiye</button>
+  </div>
+  <p id="picked"></p>
+</main>
+<script src="data.js"></script>
+<script src="search.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

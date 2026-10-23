@@ -1,0 +1,94 @@
+### Works with the VS Code "REST Client" extension: click "Send Request" above a block.
+### Run requests 1 and 2 first (the second one saves the login token for the others).
+### Interactive docs are also available at http://localhost:3000/api/docs
+
+@base = http://localhost:3000/api
+
+### 1. Register (skip if you ran `npm run db:seed`; seeded users have password "password123")
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{ "name": "Alice", "phone": "0550000001", "password": "password123" }
+
+### 2. Log in (stores the token)
+# @name login
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{ "phone": "0550000001", "password": "password123" }
+
+###
+@token = {{login.response.body.token}}
+
+### 3. Report a lost item
+POST {{base}}/items
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "itemName": "Black wallet",
+  "type": "LOST",
+  "place": "Algiers Central Station",
+  "date": "2026-10-10",
+  "description": "Leather, has ID cards",
+  "imageUrl": "https://example.com/wallet.jpg"
+}
+
+### 4. Report a found item
+POST {{base}}/items
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "itemName": "Blue umbrella", "type": "FOUND", "place": "Bab Ezzouar", "date": "2026-10-12" }
+
+### 5. Upload a photo with a report (replace the file path)
+POST {{base}}/items
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=----laf
+
+------laf
+Content-Disposition: form-data; name="itemName"
+
+House keys
+------laf
+Content-Disposition: form-data; name="type"
+
+FOUND
+------laf
+Content-Disposition: form-data; name="place"
+
+Oran
+------laf
+Content-Disposition: form-data; name="date"
+
+2026-10-15
+------laf
+Content-Disposition: form-data; name="image"; filename="keys.jpg"
+Content-Type: image/jpeg
+
+< ./keys.jpg
+------laf--
+
+### 6. List all items
+GET {{base}}/items
+
+### 7. Search and filter
+GET {{base}}/items?type=LOST&q=wallet&from=2026-10-01&to=2026-10-31&page=1&limit=10
+
+### 8. Item details
+GET {{base}}/items/1
+
+### 9. Update own report (only the fields you send are changed)
+PATCH {{base}}/items/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "place": "Hydra" }
+
+### 10. Mark as recovered
+PATCH {{base}}/items/1/recover
+Authorization: Bearer {{token}}
+
+### 11. My profile with my reports
+GET {{base}}/users/me
+Authorization: Bearer {{token}}
